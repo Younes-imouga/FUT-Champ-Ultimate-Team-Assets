@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        .container:hover {
+            cursor: grab;
+        }
+        .container:active {
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body>
+    <section id="main-section">
+        <div class="container">
+            <div id="div1" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: blue; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 1
+            </div>
+            
+            <div id="div2" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: lightgreen; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 2
+            </div>
+        </div>
+        
+        <div class="container">
+            <div id="div3" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: lightcoral; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 3
+            </div>
+
+            <div id="div4" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: red; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 4
+            </div>
+        </div>
+        <div class="container">
+            <div id="div1" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: blue; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 1
+            </div>
+            
+            <div id="div2" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: lightgreen; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 2
+            </div>
+        </div>
+        
+        <div class="container">
+            <div id="div3" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: lightcoral; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 3
+            </div>
+
+            <div id="div4" class="dropZone" draggable="true" style="width: 200px; height: 100px; background-color: red; text-align: center; line-height: 100px; margin-top: 20px;">
+                Content 4
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Select all draggable/drop zone divs
+        const divs = document.querySelectorAll('.dropZone');
+
+        let draggedDiv = null; // Keep track of the dragged div
+
+        // Add dragstart and dragend to all divs
+        divs.forEach((div) => {
+            div.addEventListener('dragstart', (elem) => {
+                draggedDiv = elem.target; // Save the dragged div
+                elem.dataTransfer.setData('text/plain', draggedDiv.innerHTML); // Save content
+                elem.dataTransfer.setData('style', JSON.stringify({
+                    backgroundColor: draggedDiv.style.backgroundColor,
+                    color: draggedDiv.style.color,
+                    border: draggedDiv.style.border,
+                })); // Save styles
+                draggedDiv.style.opacity = '0.5'; // Visual feedback
+            });
+
+            div.addEventListener('dragend', () => {
+                draggedDiv.style.opacity = '1'; // Reset the dragged div opacity
+                draggedDiv = null; // Clear the draggedDiv reference
+            });
+
+            // Enable dropping by preventing default behavior on dragover
+            div.addEventListener('dragover', (elem) => {
+                elem.preventDefault();
+            });
+
+            // Handle drop event
+            div.addEventListener('drop', (elem) => {
+                elem.preventDefault();
+
+                if (draggedDiv && draggedDiv !== elem.target) { // Only swap if draggedDiv is not the drop target
+                    // Get dragged div's content and styles
+                    const draggedContent = elem.dataTransfer.getData('text/plain');
+                    const draggedStyles = JSON.parse(elem.dataTransfer.getData('style'));
+
+                    // Store the drop target's current content and styles
+                    const targetContent = elem.target.innerHTML;
+                    const targetStyles = {
+                        backgroundColor: elem.target.style.backgroundColor,
+                        color: elem.target.style.color,
+                        border: elem.target.style.border,
+                    };
+
+                    // Swap: Update the drop target with dragged div's data
+                    elem.target.innerHTML = draggedContent;
+                    elem.target.style.backgroundColor = draggedStyles.backgroundColor;
+                    elem.target.style.color = draggedStyles.color;
+                    elem.target.style.border = draggedStyles.border;
+
+                    // Swap: Update the dragged div with the drop target's data
+                    draggedDiv.innerHTML = targetContent;
+                    draggedDiv.style.backgroundColor = targetStyles.backgroundColor;
+                    draggedDiv.style.color = targetStyles.color;
+                    draggedDiv.style.border = targetStyles.border;
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
