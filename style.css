@@ -19,7 +19,7 @@
     .container {
         margin: 50px;
         min-width: 320px;
-        max-width: 800px;
+        max-width: 719px;
         background-color: #2c2c2c;
         border-radius: 10px;
         padding: 20px;
@@ -45,6 +45,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+        gap: 30px;
     }
 
     /* Buttons and Actions */
@@ -65,6 +66,7 @@
                 width: 40%;
             }
             > select {
+                text-align: center;
                 background-color: #2c2c2c; /* Match the app's dark background */
                 color: #fff;
                 font-size: 20px;
@@ -120,6 +122,9 @@
     /* Player Cards Section */
     .player-cards {
         width: 50%;
+        min-width: 380px;
+        height: 245px;
+        margin-left: 20px;
         display: flex;
         gap: 10px;
         overflow-x: auto;
@@ -132,39 +137,186 @@
         scrollbar-color: #f1c40f #2c2c2c;
     }
     
-    .card {
-        flex: 0 0 auto;
-        width: 180px;
-        height: 100%;
-        border-radius: 5px;
-        background-color: #fff;
-    }
-    
-    .card img {
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-    }
-    
     /* Field Section */
     .field-section {
         text-align: center;
+        position: relative;
+        width: 100%;
+        height: 400px;
+        background-color: #3b3b3b;
+        border-radius: 10px;
     }
     
     .field-section img {
         max-width: 100%;
         border-radius: 5px;
     }
-    
+
+    .position {
+        width: 90px;
+        height: 110px;
+        background-color: #fff;
+        border: 2px solid #f1c40f;
+        border-radius: 5px;
+        position: absolute; /* Controlled by formation logic */
+        text-align: center;
+        display: flex; /* For centering content */
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Ensures content doesn’t overflow the container */
+        font-weight: bold;
+        color: #000;
+        transition: transform 0.3s ease-in-out; /* Smooth transformation */
+    }
+
     @media (max-width: 768px) {
         .management-section {
             flex-direction: column;
             gap: 15px;
         }
+        .player-cards {
+            min-width: 100%;
+            margin: 0;
+            height: 250px;
+        }
         .actions {
             min-width: 100%;
         }
-        .player-cards {
-            min-width: 100%;
+        .position {
+            width: 15%;
+            height: 10%;
+            font-size: 0.5em;
+            transition: 0.5;
+        }
+        .position:active {
+            width: 100px;
+            height: 106px;
+            z-index: 10;
         }
     }
+
+    .card {
+        width: 180px;
+        height: 220px;
+        background: linear-gradient(145deg,  #ffc125, #ffc738, #ffffff, #ffc125);
+        border-radius: 15px;
+        border: 2px solid #a58a52;
+        position: relative;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #333;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .position .card {
+        width: 100%;
+        height: 100%;
+        > .rating {
+            font-size: 120%;
+        }
+        > .positionn {
+            font-size: 60%;
+            top: 20%;
+        }
+        > .stats, .nationality-club {
+            display: none;
+        }
+        > img {
+            width: 80%;
+            height: 80%;
+            left: 10%;
+            top: 10%;
+        }
+        > .player-name {
+            top: 80%;
+            color: #000;
+        }
+      }
+      /* Rating and positionn section */
+      .card .rating {
+        font-size: 28px;
+        font-weight: bold;
+        position: absolute;
+        top: 2%;
+        left: 5%;
+        color: #000;
+      }
+  
+      .card .positionn {
+        font-size: 14px;
+        font-weight: bold;
+        position: absolute;
+        top: 13%;
+        left: 7%;
+        color: #000;
+      }
+  
+      /* Player image */
+      .card .player-photo {
+        transform: scale(0.8);
+        width: 50%;
+        height: 40%;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        position: absolute;
+        top: 12%;
+        left: 25%;
+        object-fit: cover;
+      }
+  
+      /* Player name */
+      .card .player-name {
+        font-size: 16px;
+        font-weight: bold;
+        position: absolute;
+        top: 55%;
+        width: 100%;
+        text-align: center;
+      }
+  
+      /* Nationality and club */
+      .card .nationality-club {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 62%;
+        left: 15px;
+        right: 15px;
+      }
+  
+      .card .nationality-club img {
+        width: 30px;
+        height: 20px;
+      }
+  
+      .card .nationality-club span {
+        font-size: 14px;
+      }
+  
+      /* Stats section */
+      .card .stats {
+        position: absolute;
+        bottom: 20px;
+        left: 15px;
+        right: 15px;
+        text-align: left;
+      }
+  
+      .card .stats .stat {
+        display: flex;
+        justify-content: space-around;
+        gap: 4px;
+        font-size: 11px;
+      }
+  
+      .card .stats .stat span {
+        font-weight: bold;
+      }
+
+      .dragging {
+        opacity: 0.5; /* Make the element semi-transparent while dragging */
+        border: 2px dashed #3498db; /* Add a dashed border for feedback */
+        transform: scale(.8);
+      }
+      

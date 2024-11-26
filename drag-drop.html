@@ -73,7 +73,7 @@
                 draggedDiv = elem.target; // Save the dragged div
                 elem.dataTransfer.setData('text/plain', draggedDiv.innerHTML); // Save content
                 elem.dataTransfer.setData('style', JSON.stringify({
-                    backgroundColor: draggedDiv.style.backgroundColor,
+                    backgroundimage: draggedDiv.style.backgroundimage,
                     color: draggedDiv.style.color,
                     border: draggedDiv.style.border,
                 })); // Save styles
@@ -102,20 +102,20 @@
                     // Store the drop target's current content and styles
                     const targetContent = elem.target.innerHTML;
                     const targetStyles = {
-                        backgroundColor: elem.target.style.backgroundColor,
+                        backgroundimage: elem.target.style.backgroundimage,
                         color: elem.target.style.color,
                         border: elem.target.style.border,
                     };
 
                     // Swap: Update the drop target with dragged div's data
                     elem.target.innerHTML = draggedContent;
-                    elem.target.style.backgroundColor = draggedStyles.backgroundColor;
+                    elem.target.style.backgroundimage = draggedStyles.backgroundimage;
                     elem.target.style.color = draggedStyles.color;
                     elem.target.style.border = draggedStyles.border;
 
                     // Swap: Update the dragged div with the drop target's data
                     draggedDiv.innerHTML = targetContent;
-                    draggedDiv.style.backgroundColor = targetStyles.backgroundColor;
+                    draggedDiv.style.backgroundimage = targetStyles.backgroundimage;
                     draggedDiv.style.color = targetStyles.color;
                     draggedDiv.style.border = targetStyles.border;
                 }
