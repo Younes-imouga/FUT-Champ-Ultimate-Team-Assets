@@ -8,12 +8,11 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
+
     <header class="header">
       <h1>FUT-Champ-Ultimate-Team</h1>
     </header>
 
-    <!-- Player Management Section -->
     <div class="management-section">
       <div class="actions">
         <div>
@@ -33,7 +32,6 @@
               <option value="default">change formation</option>
                 <option value="1">4-4-2</option>
                 <option value="2">4-3-3</option>
-                <option value="3">3-4-3</option>
             </select>
         </div>
       </div>
@@ -47,13 +45,7 @@
             <div class="positionn">RW</div>
         
             <!-- Player Photo -->
-            <img
-              src="https://cdn.sofifa.net/players/158/023/25_120.png"
-              alt="Lionel Messi"
-              class="player-photo"
-              draggable="false"
-
-            />
+            <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="Lionel Messi" class="player-photo" draggable="false"/>
         
             <!-- Player Name -->
             <div class="player-name">Messi</div>
@@ -135,12 +127,12 @@
         <div class="dropZone" draggable="true">
           <div class="card">
             <!-- Player Rating and Positionn -->
-            <div class="rating">93</div>
-            <div class="positionn">RW</div>
+            <div class="rating">88</div>
+            <div class="positionn">SF</div>
         
             <!-- Player Photo -->
             <img
-              src="https://cdn.sofifa.net/players/158/023/25_120.png"
+              src="https://cdn.sofifa.net/meta/team/503/120.png"
               alt="Lionel Messi"
               class="player-photo"
               draggable="false"
@@ -148,7 +140,7 @@
             />
         
             <!-- Player Name -->
-            <div class="player-name">Messi</div>
+            <div class="player-name">l3arbi</div>
         
             <!-- Nationality and Club -->
             <div class="nationality-club">
@@ -168,12 +160,12 @@
         <span>PHY</span>
     </div>
     <div class="stat">
-        <span>85</span>
-        <span>92</span>
-        <span>91</span>
-        <span>95</span>
-        <span>35</span>
-        <span>65</span>
+        <span>99</span>
+        <span>99</span>
+        <span>99</span>
+        <span>99</span>
+        <span>99</span>
+        <span>99</span>
       </div>
   </div>
           </div>
@@ -227,20 +219,205 @@
       </div>
     </div>
 
-    <section>
-      <div>
-        <label for="name">Enter player name: </label>
+    <style>
+      .player-info select {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #2c2c2c;
+        color: #fff;
+        font-size: 20px;
+        padding: 10px 15px;
+        border: 1px solid #f1c40f;
+        box-shadow: 1px 1px 1px 1px hsl(48, 89%, 50%);
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .player-info input{
+        width: 50%;
+        background-color: #2c2c2c;
+        border: 1px solid #2c2c2c;
+        box-shadow: 1px 1px 1px 1px hsl(48, 89%, 50%);
+        color: white;
+        font-size: 1em;
+        padding: 5px;
+      }
+      .required {
+        color: rgb(255, 0, 0);
+        display: none;
+      }
+      .labels{
+        width: 40%;
+        font-size: 90%;
+      }
+      .input-container{
+        display: flex;
+        justify-content: space-between;
+      }
+      @media screen and (max-width: 700px) {
+        .player-info {
+          font-size: 15px;
+        }
+        .player-info select{
+          font-size: 15px;
+          width: 80%;
+        }
+        .labels {
+          font-size: 15px;
+          width: 100%;
+          margin: 10px auto;
+          text-align: center;
+        }
+        .input-container{
+          flex-direction: column;
+        }
+        .player-info input{
+          width: 100%;
+          max-width: 400px;
+          font-size: 15px;
+          margin: 10px auto;
+        }
+      }
+      .btn2{
+        width: min(500px, 100%);
+        margin: 0 auto;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .player-stats{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: space-around;
+        flex-wrap: wrap;
+      }
+      .player-stats div {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+      }
+      .player-stats div input {
+        text-align: center;
+      }
+      .player-info {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+      }
+    </style>
+
+    <section class="player-info hidden">
+      <div style="display: flex; justify-content: space-between;" class="input-container">
+        <div class="labels">
+          <label for="name">Enter player name: <span class="required">*</span></label>
+          <p class="required" style="font-size: 0.8rem;">ce champ est obligatoire</p>
+        </div>
         <input type="text" id="name" name="name">
       </div>
-      <div>
-        <label for="name">Enter player name: </label>
-        <input type="text" id="name" name="name">
+      <div style="display: flex; justify-content: space-between;" class="input-container">
+        <div class="labels">
+          <label for="photo">Enter player photo URL: <span class="required">*</span></label>
+          <p class="required" style="font-size: 0.8rem;">ce champ est obligatoire</p>
+        </div>
+        <input type="text" id="photo" name="photo">
       </div>
+      <div style="display: flex; justify-content: space-between;" class="input-container">
+        <div class="labels">
+          <label for="nationality">Enter player nationality: <span class="required">*</span></label>
+          <p class="required" style="font-size: 0.8rem;">ce champ est obligatoire</p>
+        </div>
+        <input type="text" id="nationality" name="nationality">
+      </div>
+      <div style="display: flex; justify-content: space-between;" class="input-container">
+        <div class="labels">
+          <label for="flag">Enter player flag URL: <span class="required">*</span></label>
+          <p class="required" style="font-size: 0.8rem;">ce champ est obligatoire</p>
+        </div>
+        <input type="text" id="flag" name="flag">
+      </div>
+      <div style="display: flex; justify-content: space-between;" class="input-container">
+        <div class="labels">
+          <label for="club">Enter player club name: <span class="required">*</span></label>
+          <p class="required" style="font-size: 0.8rem;">ce champ est obligatoire</p>
+        </div>
+        <input type="text" id="club" name="club">
+      </div>
+      <div style="display: flex; justify-content: space-between;" class="input-container">
+        <div class="labels">
+          <label for="logo">Enter player club logo URL: <span class="required">*</span></label>
+          <p class="required" style="font-size: 0.8rem;">ce champ est obligatoire</p>
+        </div>
+        <input type="text" id="logo" name="logo">
+      </div>
+      <select name="position-select" id="position-select">
+        <option value="Default">Choose Position</option>
+        <option value="GK">GK</option>
+        <option value="LB">LB</option>
+        <option value="RB">RB</option>
+        <option value="CB">CB</option>
+        <option value="LM">LM</option>
+        <option value="RM">RM</option>
+        <option value="CM">CM</option>
+        <option value="LW">LW</option>
+        <option value="RW">RW</option>
+        <option value="ST">ST</option>
+      </select>
+      <div class="player-stats" style="display: none;">
+        <div>
+          <label for="input1" id="player">Enter rating : <span class="required">*</span></label>
+          <label for="input1" id="goal-keeper" style="display: none;">Enter rating :</label>
+          <input id="input1" name="input1" type="number" min="1" max="100">
+        </div>
+        <div>
+          <label for="input2" id="player">Enter pace</label>
+          <label for="input2" id="goal-keeper" style="display: none;">Enter diving :</label>
+          <input id="input2" name="input2" type="number" min="1" max="100">
+        </div>
+        <div>
+          <label for="input3" id="player">Enter shooting</label>
+          <label for="input3" id="goal-keeper" style="display: none;">Enter handling :</label>
+          <input id="input3" name="input3" type="number" min="1" max="100">
+        </div>
+        <div>
+          <label for="input4" id="player">Enter passing</label>
+          <label for="input4" id="goal-keeper" style="display: none;">Enter kicking :</label>
+          <input id="input4" name="input4" type="number" min="1" max="100">
+        </div>
+        <div>
+          <label for="input5" id="player">Enter dribbling</label>
+          <label for="input5" id="goal-keeper" style="display: none;">Enter reflexes :</label>
+          <input id="input5" name="input5" type="number" min="1" max="100">
+        </div>
+        <div>
+          <label for="input6" id="player">Enter defending</label>
+          <label for="input6" id="goal-keeper" style="display: none;">Enter speed :</label>
+          <input id="input6" name="input6" type="number" min="1" max="100">
+        </div>
+        <div>
+          <label for="input7" id="player">Enter physical</label>
+          <label for="input7" id="goal-keeper" style="display: none;">Enter positioning :</label>
+          <input id="input7" name="input7" type="number" min="1" max="100">
+        </div>
+
+      </div>
+
+        <button class="btn2 confirm-add-btn hidden" >ADD</button>
+        <button class="btn2 confirm-edit-btn hidden">Edit</button>
+        <button class="btn2 confirm-remove-btn hidden">Remove</button>
+      
+
     </section>
 
-    <!-- Field Section -->
-    <div class="field-section" style="background-image: url(src/assets/img/stadium_background.webp); height: 720px; background-position:center; background-repeat: no-repeat;">
+    <div class="clicked-card hidden"></div>
 
+    <div class="field-section" style="background-image: url(src/assets/img/stadium_background.webp); height: 720px; background-position:center; background-repeat: no-repeat;">
       <div class="position dropZone" draggable="true" id="pos1"></div>
       <div class="position dropZone" draggable="true" id="pos2"></div>
       <div class="position dropZone" draggable="true" id="pos3"></div>
@@ -251,8 +428,7 @@
       <div class="position dropZone" draggable="true" id="pos8"></div>
       <div class="position dropZone" draggable="true" id="pos9"></div>
       <div class="position dropZone" draggable="true" id="pos10"></div>
-      <div class="position dropZone" draggable="true" id="pos11"></div>
-
+      <div class="position dropZone" dr aggable="true" id="pos11"></div>
     </div>
   </div>
 

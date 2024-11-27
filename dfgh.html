@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Data Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        form {
+            width: 50%;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="player-form">
+        <div class="section">
+            <h2>Patient Information</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="photo">Photo:</label>
+            <input type="text" id="photo" name="photo"><br><br>
+            <label for="position">Position:</label>
+            <select id="position" name="position">
+                <option value="RW">Right Wing</option>
+                <option value="LW">Left Wing</option>
+                <option value="ST">Striker</option>
+                <option value="DF">Defender</option>
+                <option value="MF">Midfielder</option>
+            </select><br><br>
+        </div>
+
+        <div class="section">
+            <h2>Player Details</h2>
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality"><br><br>
+            <label for="flag">Flag:</label>
+            <input type="text" id="flag" name="flag"><br><br>
+            <label for="club">Club:</label>
+            <input type="text" id="club" name="club"><br><br>
+            <label for="logo">Logo:</label>
+            <input type="text" id="logo" name="logo"><br><br>
+        </div>
+
+        <div class="section">
+            <h2>Player Statistics</h2>
+            <label for="rating">Rating:</label>
+            <input type="number" id="rating" name="rating"><br><br>
+            <label for="pace">Pace:</label>
+            <input type="number" id="pace" name="pace"><br><br>
+            <label for="shooting">Shooting:</label>
+            <input type="number" id="shooting" name="shooting"><br><br>
+            <label for="passing">Passing:</label>
+            <input type="number" id="passing" name="passing"><br><br>
+            <label for="defense">Defense:</label>
+            <input type="number" id="defense" name="defense"><br><br>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('player-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const photo = document.getElementById('photo').value;
+            const position = document.getElementById('position').value;
+            const nationality = document.getElementById('nationality').value;
+            const flag = document.getElementById('flag').value;
+            const club = document.getElementById('club').value;
+            const logo = document.getElementById('logo').value;
+            const rating = document.getElementById('rating').value;
+            const pace = document.getElementById('pace').value;
+            const shooting = document.getElementById('shooting').value;
+            const passing = document.getElementById('passing').value;
+            const defense = document.getElementById('defense').value;
+
+            console.log({
+                name,
+                photo,
+                position,
+                nationality,
+                flag,
+                club,
+                logo,
+                rating,
+                pace,
+                shooting,
+                passing,
+                defense
+            });
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>

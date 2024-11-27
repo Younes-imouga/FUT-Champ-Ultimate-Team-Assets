@@ -6,142 +6,165 @@
   <title>FIFA Card</title>
   <style>
     /* Card container */
-    .fifa-card {
-      width: 180px;
-      height: 220px;
-      background: linear-gradient(145deg, #e4c98c, #d9b867);
-      border-radius: 15px;
-      border: 2px solid #a58a52;
-      position: relative;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      color: #333;
-      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-    }
+    .card {
+        width: 180px;
+        height: 220px;
+        /* background: linear-gradient(145deg,  #ffc125, #ffc738, white, #ffc125); */
+        background-image: url(src/assets/img/badge_gold.webp);
+        background-size: cover;
+        background-position: -10%;
+        border-radius: 15px;
+        position: relative;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
 
-    /* Rating and positionn section */
-    .fifa-card .rating {
-      font-size: 28px;
-      font-weight: bold;
-      position: absolute;
-      top: 2%;
-      left: 5%;
-      color: #000;
-    }
+      .position .card {
+        width: 100%;
+        height: 100%;
+        > .rating {
+            font-size: 120%;
+        }
+        > .positionn {
+            font-size: 60%;
+            top: 20%;
+        }
+        > .stats, .nationality-club {
+            display: none;
+        }
+        > img {
+            width: 80%;
+            height: 80%;
+            left: 10%;
+            top: 10%;
+        }
+        > .player-name {
+            top: 80%;
+            color: #000;
+        }
+      }
 
-    .fifa-card .positionn {
-      font-size: 14px;
-      font-weight: bold;
-      position: absolute;
-      top: 13%;
-      left: 7%;
-      color: #000;
-    }
-
-    /* Player image */
-    .fifa-card .player-photo {
-      width: 50%;
-      height: 40%;
-      border-radius: 50%;
-      border: 2px solid #fff;
-      position: absolute;
-      top: 12%;
-      left: 25%;
-      object-fit: cover;
-    }
-
-    /* Player name */
-    .fifa-card .player-name {
-      font-size: 16px;
-      font-weight: bold;
-      position: absolute;
-      top: 55%;
-      width: 100%;
-      text-align: center;
-    }
-
-    /* Nationality and club */
-    .fifa-card .nationality-club {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: absolute;
-      top: 62%;
-      left: 15px;
-      right: 15px;
-    }
-
-    .fifa-card .nationality-club img {
-      width: 30px;
-      height: 20px;
-    }
-
-    .fifa-card .nationality-club span {
-      font-size: 14px;
-    }
-
+      .card .rating {
+        font-size: 22px;
+        font-weight: bold;
+        position: absolute;
+        top: 17%;
+        left: 13%;
+        color: #000;
+      }
+  
+      .card .positionn {
+        font-size: 10px;
+        font-weight: bold;
+        position: absolute;
+        top: 26%;
+        left: 15%;
+        color: #000;
+      }
+  
+      .card .player-photo {
+        transform: scale(0.9);
+        width: 50%;
+        height: 40%;
+        border-radius: 50%;
+        position: absolute;
+        top: 17%;
+        left: 25%;
+        object-fit: cover;
+      }
+  
+      .card .player-name {
+        font-size: 16px;
+        font-weight: bold;
+        position: absolute;
+        top: 60%;
+        width: 100%;
+        text-align: center;
+      }
+  
+      .card .nationality-club {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        width: 75%;
+        font-size: 0.9em;
+        top: 70%;
+        left: 23px;
+        right: 15px;
+      }
+  
+      .card .nationality-club img {
+        width: 30px;
+        height: 20px;
+      }
+  
     /* Stats section */
-    .fifa-card .stats {
-      position: absolute;
-      bottom: 20px;
-      left: 15px;
-      right: 15px;
-      text-align: left;
+    .card .stats {
+        position: absolute;
+        bottom: 20px;
+        left: 15px;
+        text-align: left;
+        margin-left: 8%;
     }
+  
+    .card .stats .stat {
+          display: flex;
+          justify-content: space-around;
+          gap: 5px;
+          font-size: 8px;
+      }
+    
+    .card   .stats .stat span {
+          font-weight: bold;
+      }
 
-    .fifa-card .stats .stat {
-      display: flex;
-      justify-content: space-around;
-      gap: 4px;
-      font-size: 11px;
-    }
-
-    .fifa-card .stats .stat span {
-      font-weight: bold;
-    }
+      .dragging {
+          opacity: 0.5;
+          border: 2px dashed #3498db;
+          transform: scale(.8);
+      }
   </style>
 </head>
 <body>
-  <div class="fifa-card">
-    <!-- Player Rating and Positionn -->
-    <div class="rating">93</div>
-    <div class="positionn">RW</div>
+    <div class="card">
+      <!-- Player Rating and Positionn -->
+      <div class="rating">93</div>
+      <div class="positionn">RW</div>
 
-    <!-- Player Photo -->
-    <img
-      src="https://cdn.sofifa.net/players/158/023/25_120.png"
-      alt="Lionel Messi"
-      class="player-photo"
-    />
+      <!-- Player Photo -->
+      <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="Lionel Messi" class="player-photo" draggable="false"/>
 
-    <!-- Player Name -->
-    <div class="player-name">Messi</div>
+      <!-- Player Name -->
+      <div class="player-name">Messi</div>
 
-    <!-- Nationality and Club -->
-    <div class="nationality-club">
-      <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" />
-      <span>Inter Miami</span>
-      <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami" />
-    </div>
+      <!-- Nationality and Club -->
+      <div class="nationality-club">
+        <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" />
+        <span>Inter Miami</span>
+        <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami"/>
+      </div>
 
-    <!-- Player Stats -->
+      <!-- Player Stats -->
     <div class="stats">
-      <div class="stat">
-        <span>PAC</span>
-        <span>SHO</span>
-        <span>PAS</span>
-        <span>DRI</span>
-        <span>DEF</span>
-        <span>PHY</span>
+    <div class="stat">
+    <span>PAC</span>
+    <span>SHO</span>
+    <span>PAS</span>
+    <span>DRI</span>
+    <span>DEF</span>
+    <span>PHY</span>
     </div>
     <div class="stat">
-        <span>85</span>
-        <span>92</span>
-        <span>91</span>
-        <span>95</span>
-        <span>35</span>
-        <span>65</span>
-      </div>
+    <span>85</span>
+    <span>92</span>
+    <span>91</span>
+    <span>95</span>
+    <span>35</span>
+    <span>65</span>
+    </div>
+    </div>
   </div>
 </body>
 </html>
