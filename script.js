@@ -208,16 +208,24 @@ const formations = {
   
   const nameinput = document.getElementById("name")
   const photoinput = document.getElementById("photo")
-  const nationalityinput = document.getElementById("natinality")
+  const nationalityinput = document.getElementById("nationality")
   const flaginput = document.getElementById("flag")
   const clubinput = document.getElementById("club")
   const logoinput = document.getElementById("logo")
   const positionselect = document.getElementById("position-select")
+
+  const input1 = document.getElementById("input1");
+  const input2 = document.getElementById("input2");
+  const input3 = document.getElementById("input3");
+  const input4 = document.getElementById("input4");
+  const input5 = document.getElementById("input5");
+  const input6 = document.getElementById("input6");
+  const input7 = document.getElementById("input7");
   
   positionselect.addEventListener("change", () => {
     let playerstats = document.querySelector(".player-stats");
-    let playerinputs = document.querySelectorAll("#player");
-    let GKinputs = document.querySelectorAll("#goal-keeper");
+    let playerinputs = document.querySelectorAll(".player");
+    let GKinputs = document.querySelectorAll(".goal-keeper");
     if (positionselect.value === "GK") {
       playerstats.style.display = "block";
       GKinputs.forEach(GKinput => {
@@ -231,7 +239,6 @@ const formations = {
       playerstats.style.display = "block";
       GKinputs.forEach(GKinput => {
         GKinput.style.display = "none"
-
       })
       playerinputs.forEach(playerinput => {
         playerinput.style.display = "block"
@@ -239,6 +246,170 @@ const formations = {
       })
     }
   })
-  confirmaddbtn.addEventListener("click", () => {
 
-  })
+  confirmaddbtn.addEventListener("click", () => {
+    if (nameinput.value && photoinput.value && nationalityinput.value && flaginput.value && clubinput.value && logoinput.value && positionselect.value && input1.value && input2.value && input3.value && input4.value && input5.value && input6.value && input7.value) {
+      let playername = nameinput.value;
+      let playerphoto = photoinput.value;
+      let playernationality = nationalityinput.value;
+      let playerflag = flaginput.value;
+      let playerclub = clubinput.value;
+      let playerlogo = logoinput.value;
+      let playerposition = positionselect.value;
+      let playerstats1 = input1.value;
+      let playerstats2 = input2.value;
+      let playerstats3 = input3.value;
+      let playerstats4 = input4.value;
+      let playerstats5 = input5.value;
+      let playerstats6 = input6.value;
+      let playerstats7 = input7.value;
+
+      const newplayercard = document.createElement("div");
+      newplayercard.draggable = "true";
+      newplayercard.classList.add("dropZone");
+      
+      if (playerposition === "GK") {
+        newplayercard.innerHTML = `
+            <div class="card">
+              <div class="rating">${playerstats1}</div>
+              <div class="positionn">${playerposition}</div>
+
+              <img src="${playerphoto}" alt="${playername}" class="player-photo" draggable="false"/>
+
+              <div class="player-name">${playername}</div>
+
+              <div class="nationality-club">
+                <img src="${playerflag}" alt="${playernationality}" />
+                <span>${playerclub}</span>
+                <img src="${playerlogo}" alt="${playerclub}" />
+              </div>
+
+            <div class="stats">
+              <div class="stat">
+                <span>PAC</span>
+                <span>SHO</span>
+                <span>PAS</span>
+                <span>DRI</span>
+                <span>DEF</span>
+                <span>PHY</span>
+              </div>
+              <div class="stat">
+                  <span>${playerstats2}</span>
+                  <span>${playerstats3}</span>
+                  <span>${playerstats4}</span>
+                  <span>${playerstats5}</span>
+                  <span>${playerstats6}</span>
+                  <span>${playerstats7}</span>
+                </div>
+              </div>
+            </div>`;
+      } else {
+        newplayercard.innerHTML = `
+                  <div class="card">
+              <div class="rating">${playerstats1}</div>
+              <div class="positionn">${playerposition}</div>
+          
+              <img src="${playerphoto}" alt="${playername}" class="player-photo" draggable="false"/>
+          
+              <div class="player-name">${playername}</div>
+          
+              <div class="nationality-club">
+                <img src="${playerflag}" alt="${playernationality}" />
+                <span>${playerclub}</span>
+                <img src="${playerlogo}" alt="${playerclub}" />
+              </div>
+          
+            <div class="stats">
+              <div class="stat">
+                <span>PAC</span>
+                <span>SHO</span>
+                <span>PAS</span>
+                <span>DRI</span>
+                <span>DEF</span>
+                <span>PHY</span>
+              </div>
+              <div class="stat">
+                  <span>${playerstats2}</span>
+                  <span>${playerstats3}</span>
+                  <span>${playerstats4}</span>
+                  <span>${playerstats5}</span>
+                  <span>${playerstats6}</span>
+                  <span>${playerstats7}</span>
+                </div>
+              </div>
+            </div>`;
+      }
+      playerContainer.appendChild(newplayercard);
+      dragAndDropEventListener(newplayercard);
+      nameinput.value = "";
+      photoinput.value = "";
+      nationalityinput.value = "";
+      flaginput.value = "";
+      clubinput.value = "";
+      logoinput.value = "";
+      positionselect.value = "Default";
+      input1.value = "";
+      input2.value = "";
+      input3.value = "";
+      input4.value = "";
+      input5.value = "";
+      input6.value = "";
+      input7.value = "";
+
+      playerinfo.classList.add("hidden")
+      let playerstats = document.querySelector(".player-stats");
+      
+      playerstats.style.display = "none"
+
+    const errormessages = document.querySelectorAll('.required');
+    const errorstatsmessages = document.querySelectorAll(".required-stat");
+
+    errormessages.forEach(message => {
+      message.style.display = "none"
+    })
+    errorstatsmessages.forEach(message => {
+      message.style.display = "none"
+    })
+
+    confirmaddbtn.classList.toggle("hidden")
+    }
+  else {
+    const errormessages = document.querySelectorAll('.required');
+    errormessages.forEach(errormessage => {
+      if (errormessage.textContent == "*") {
+        const emptyinput = errormessage.parentNode.parentNode.parentNode.querySelector("input");
+        if (emptyinput.value == "") {
+          errormessage.style.display = "inline";
+        } else {
+          errormessage.style.display = "none";
+        }
+      } else {
+        const emptyinput = errormessage.parentNode.parentNode.querySelector("input");
+        if (emptyinput.value == "") {
+          errormessage.style.display = "block";
+        } else {
+          errormessage.style.display = "none";
+        }
+      }
+    })
+
+    const errorstatsmessages = document.querySelectorAll(".required-stat");
+    errorstatsmessages.forEach(errorstatsmessage => {
+      if (errorstatsmessage.textContent == "*") {
+        const emptystat = errorstatsmessage.parentNode.parentNode.parentNode.querySelector("input");
+        if (emptystat.value == "") {
+          errorstatsmessage.style.display = "inline";
+        } else {
+          errorstatsmessage.style.display = "none";
+        }
+      } else {
+        const emptystat = errorstatsmessage.parentNode.parentNode.querySelector("input");
+        if (emptystat.value == "") {
+          errorstatsmessage.style.display = "block";
+        } else {
+          errorstatsmessage.style.display = "none";
+        }
+      }
+    })
+  }
+})
