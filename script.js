@@ -413,3 +413,98 @@ const formations = {
     })
   }
 })
+
+
+const editBtn = document.querySelector('.edit-btn');
+const editInstructions = document.querySelector('#edit-text');
+let isEditMode = false; 
+let selectedCard = null; 
+
+ 
+editBtn.addEventListener('click', () => {
+  if (!isEditMode) {
+    isEditMode = true;
+    editInstructions.classList.remove('hidden');
+    editInstructions.textContent = "Click on a player card to edit.";
+  } else {
+ 
+    resetEditMode();
+  }
+});
+
+ 
+document.querySelectorAll('.dropZone').forEach(card => {
+  card.addEventListener('click', () => {
+    if (isEditMode && !selectedCard) {
+      selectedCard = card;
+      editInstructions.textContent = "Editing mode active. Modify the player details below.";
+      editInstructions.classList.add('hidden');
+
+  
+      const name = card.querySelector('.player-name').textContent;
+      const photo = card.querySelector('.player-photo').src;
+      const position = card.querySelector('.positionn').textContent;
+      const rating = card.querySelector('.rating').textContent;
+
+      nameinput.value = name;
+      photoinput.value = photo;
+      positionselect.value = position;
+      input1.value = rating;
+
+ 
+      const stats = card.querySelectorAll('.stat:last-child span');
+      [input2.value, input3.value, input4.value, input5.value, input6.value, input7.value] = Array.from(stats).map(stat => stat.textContent);
+
+      document.querySelector(".player-stats").style.display = "block";
+      playerinfo.classList.remove('hidden'); 
+      confirmaddbtn.classList.add('hidden'); 
+      document.querySelector('.confirm-edit-btn').classList.remove('hidden'); 
+    }
+  });
+});
+
+
+document.querySelector('.confirm-edit-btn').addEventListener('click', () => {
+  if (selectedCard) {
+    const updatedName = nameinput.value;
+    const updatedPhoto = photoinput.value;
+    const updatedPosition = positionselect.value;
+    const updatedRating = input1.value;
+
+    const updatedStats = [
+      input2.value,
+      input3.value,
+      input4.value,
+      input5.value,
+      input6.value,
+      input7.value,
+    ];
+
+
+    selectedCard.querySelector('.player-name').textContent = updatedName;
+    selectedCard.querySelector('.player-photo').src = updatedPhoto;
+    selectedCard.querySelector('.positionn').textContent = updatedPosition;
+    selectedCard.querySelector('.rating').textContent = updatedRating;
+
+    const statsSpans = selectedCard.querySelectorAll('.stat:last-child span');
+    updatedStats.forEach((stat, index) => {
+      statsSpans[index].textContent = stat;
+    });
+
+    resetEditMode();
+
+    document.querySelector(".player-stats").style.display = "none";
+    playerinfo.classList.add('hidden');
+  }
+});
+
+function resetEditMode() {
+  isEditMode = false;
+  selectedCard = null;
+  editInstructions.classList.add('hidden');
+  editInstructions.textContent = "";
+  document.querySelector('.confirm-edit-btn').classList.add('hidden');
+  confirmaddbtn.classList.remove('hidden');
+  document.querySelector(".player-stats").style.display = "none";
+  playerinfo.classList.add('hidden');
+}
