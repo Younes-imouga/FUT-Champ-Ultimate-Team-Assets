@@ -36,28 +36,22 @@
         </div>
       </div>
 
-      <!-- Player Cards Section -->
       <div class="player-cards">
         <div class="dropZone" draggable="true">
           <div class="card">
-            <!-- Player Rating and Positionn -->
             <div class="rating">93</div>
             <div class="positionn">RW</div>
         
-            <!-- Player Photo -->
             <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="Lionel Messi" class="player-photo" draggable="false"/>
         
-            <!-- Player Name -->
             <div class="player-name">Messi</div>
         
-            <!-- Nationality and Club -->
             <div class="nationality-club">
               <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" />
               <span>Inter Miami</span>
               <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami" />
             </div>
         
-            <!-- Player Stats -->
           <div class="stats">
             <div class="stat">
               <span>PAC</span>
@@ -80,30 +74,24 @@
         </div>
         <div class="dropZone" draggable="true">
           <div class="card">
-            <!-- Player Rating and Positionn -->
             <div class="rating">93</div>
             <div class="positionn">RW</div>
         
-            <!-- Player Photo -->
             <img
               src="https://cdn.sofifa.net/players/158/023/25_120.png"
               alt="Lionel Messi"
               class="player-photo"
               draggable="false"
-
             />
         
-            <!-- Player Name -->
             <div class="player-name">Messi</div>
         
-            <!-- Nationality and Club -->
             <div class="nationality-club">
               <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" />
               <span>Inter Miami</span>
               <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami" />
             </div>
         
-            <!-- Player Stats -->
     <div class="stats">
       <div class="stat">
         <span>PAC</span>
@@ -126,11 +114,9 @@
         </div>
         <div class="dropZone" draggable="true">
           <div class="card">
-            <!-- Player Rating and Positionn -->
             <div class="rating">99</div>
             <div class="positionn">ST</div>
         
-            <!-- Player Photo -->
             <img
               src="https://cdn.sofifa.net/meta/team/503/120.png"
               alt="Lionel Messi"
@@ -139,17 +125,14 @@
 
             />
         
-            <!-- Player Name -->
             <div class="player-name">l3arbi</div>
         
-            <!-- Nationality and Club -->
             <div class="nationality-club">
               <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" />
               <span>Inter Miami</span>
               <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami" />
             </div>
         
-            <!-- Player Stats -->
     <div class="stats">
       <div class="stat">
         <span>PAC</span>
@@ -172,11 +155,9 @@
         </div>
         <div class="dropZone" draggable="true">
           <div class="card">
-            <!-- Player Rating and Positionn -->
             <div class="rating">93</div>
             <div class="positionn">RW</div>
         
-            <!-- Player Photo -->
             <img
               src="https://cdn.sofifa.net/players/158/023/25_120.png"
               alt="Lionel Messi"
@@ -185,17 +166,14 @@
 
             />
         
-            <!-- Player Name -->
             <div class="player-name">Messi</div>
         
-            <!-- Nationality and Club -->
             <div class="nationality-club">
               <img src="https://cdn.sofifa.net/flags/ar.png" alt="Argentina" />
               <span>Inter Miami</span>
               <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="Inter Miami" />
             </div>
         
-            <!-- Player Stats -->
     <div class="stats">
       <div class="stat">
         <span>PAC</span>
@@ -218,6 +196,23 @@
         </div>
       </div>
     </div>
+
+
+      <div class="hidden" id="edit-text" style="width: 100%;">
+        <h3 style="text-align: center; margin: 20px;">Click On a Card To Edit A Player Click Again To Disable</h3>
+      </div>
+      <div class="hidden" id="edit-message" style="width: 100%;">
+        <h3 style="text-align: center; margin: 20px;">Editing mode active. Modify the player details below.</h3>
+      </div>
+
+      <div class="hidden" id="delete-start" style="width: 100%;">
+        <h3 style="text-align: center; margin: 20px;">Click On A Player To Delete</h3>
+      </div>
+      <div class="hidden" id="delete-confirmation-p" style="width: 100%;">
+        <h3 style="text-align: center;">The Player You Want To Delete Is : (Player Name)</h3>
+        <h4 style="text-align: center; margin: 20px;">Click Delete To Procced And Remove To Decline</h4>
+      </div>
+
 
     <section class="player-info hidden">
       <div style="display: flex; justify-content: space-between;" class="input-container">
@@ -337,17 +332,10 @@
 
         <button class="btn2 confirm-add-btn hidden" >ADD</button>
         <button class="btn2 confirm-edit-btn hidden">Edit</button>
-        <button class="btn2 confirm-remove-btn hidden">Remove</button>
+      </section>
+      <button class="btn2 confirm-remove-btn hidden" style="margin-bottom: 20px;">Delete</button>
       
-
-    </section>
-
-
-    <div class="hidden" id="edit-text" style="width: 100%;">
-      <h3 style="text-align: center; margin: 20px;">Click On a Card To Edit A Player</h3>
-    </div>
-
-    <div class="clicked-card hidden"></div>
+      <div class="clicked-card hidden"></div>
 
     <div class="field-section" style="background-image: url(src/assets/img/stadium_background.webp); height: 720px; background-position:center; background-repeat: no-repeat;">
       <div class="position dropZone" draggable="true" id="pos1"></div>

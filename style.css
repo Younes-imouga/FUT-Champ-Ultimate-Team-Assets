@@ -367,6 +367,7 @@
       }
       .player-info input{
         width: 50%;
+        border-radius: 5px;
         background-color: #2c2c2c;
         border: 1px solid #2c2c2c;
         box-shadow: 1px 1px 1px 1px hsl(48, 89%, 50%);
@@ -420,6 +421,7 @@
             align-items: center;
           }
       }
+
       .btn2{
         width: min(500px, 100%);
         margin: 0 auto;
@@ -451,4 +453,8 @@
         gap: 30px;
         font-size: 1.3rem;
         margin-bottom: 20px;
+      }
+
+      .edit-text {
+        text-align: center;
       }

@@ -2,30 +2,30 @@
 
 const formations = {
     "1": [
-        { top: "80%", left: "45%",position: "Gk" }, 
+        { top: "80%", left: "44.5%",position: "Gk" }, 
         { top: "55%", left: "15%",position: "LB" }, 
         { top: "55%", left: "75%",position: "RB" }, 
-        { top: "60%", left: "35%",position: "CB" }, 
-        { top: "60%", left: "55%",position: "CB" }, 
-        { top: "30%", left: "15%",position: "LM" }, 
-        { top: "30%", left: "75%",position: "RM" }, 
-        { top: "35%", left: "35%",position: "CM" }, 
-        { top: "35%", left: "55%",position: "CM" }, 
-        { top: "10%", left: "25%",position: "ST" }, 
-        { top: "10%", left: "65%",position: "ST" }, 
+        { top: "60%", left: "35%",position: "CB1" }, 
+        { top: "60%", left: "55%",position: "CB2" }, 
+        { top: "28%", left: "10%",position: "LM" }, 
+        { top: "28%", left: "80%",position: "RM" }, 
+        { top: "35%", left: "35%",position: "CM1" }, 
+        { top: "35%", left: "55%",position: "CM2" }, 
+        { top: "10%", left: "25%",position: "ST1" }, 
+        { top: "10%", left: "65%",position: "ST2" }, 
     ],
     "2": [
-        { top: "80%", left: "45%",position: "Gk" }, 
-        { top: "55%", left: "15%",position: "LB" }, 
-        { top: "55%", left: "75%",position: "RB" }, 
-        { top: "60%", left: "35%",position: "CB" }, 
-        { top: "60%", left: "55%",position: "CB" }, 
-        { top: "32%", left: "15%",position: "LM" }, 
-        { top: "32%", left: "75%",position: "RM" }, 
-        { top: "37%", left: "45%",position: "CM" }, 
-        { top: "15%", left: "15%",position: "LW" }, 
-        { top: "15%", left: "75%",position: "RW" }, 
-        { top: "10%", left: "45%",position: "ST" }, 
+        { top: "80%", left: "44.5%",position: "Gk" },
+        { top: "55%", left: "15%",position: "LB" },
+        { top: "55%", left: "75%",position: "RB" },
+        { top: "60%", left: "35%",position: "CB1" },
+        { top: "60%", left: "55%",position: "CB2" },
+        { top: "35%", left: "25%",position: "LM" },
+        { top: "35%", left: "65%",position: "RM" },
+        { top: "31%", left: "44.5%",position: "CM" },
+        { top: "15%", left: "15%",position: "LW" },
+        { top: "15%", left: "75%",position: "RW" },
+        { top: "10%", left: "44.5%",position: "ST" },
     ]
   };
   
@@ -77,7 +77,7 @@ const formations = {
       element.addEventListener("dragstart", (e) => {
         draggedElement = e.target; 
         e.dataTransfer.setData("text/plain", draggedElement.innerHTML); 
-        e.dataTransfer.effectAllowed = "move"; 
+        e.dataTransfer.effectAllowed = "move";
         draggedElement.classList.add("dragging"); 
       });
     
@@ -157,15 +157,17 @@ const formations = {
 
     document.querySelectorAll('.position').forEach((e) => {
       e.addEventListener('click', () => {
-        const clickedcontainer = document.querySelector('.clicked-card');
-        if (e.innerHTML !== '') {    
-            clickedcontainer.innerHTML = e.innerHTML;
-            clickedcontainer.classList.remove("hidden");
-            clickedcontainer.addEventListener("click", () => {
-              clickedcontainer.classList.add("hidden");
-            });
-        } else {
-          clickedcontainer.classList.add("hidden");
+        if (!iseditmode) {          
+          const clickedcontainer = document.querySelector('.clicked-card');
+          if (e.innerHTML !== '') {    
+              clickedcontainer.innerHTML = e.innerHTML;
+              clickedcontainer.classList.remove("hidden");
+              clickedcontainer.addEventListener("click", () => {
+                clickedcontainer.classList.add("hidden");
+              });
+          } else {
+            clickedcontainer.classList.add("hidden");
+          }
         }
       });
   });
@@ -199,8 +201,28 @@ const formations = {
   const confirmaddbtn = document.querySelector(".confirm-add-btn")
 
   addbtn.addEventListener("click",() => {
-    playerinfo.classList.toggle("hidden");
-    confirmaddbtn.classList.toggle("hidden");
+    if (iseditmode == true) {
+      reseteditmode();
+      resetdeletmode();
+
+      confirmaddbtn.classList.remove('hidden');
+
+  
+      playerinfo.classList.toggle("hidden");
+      // confirmaddbtn.classList.toggle("hidden");
+    } else if (isdeletemode == true) {
+      reseteditmode();
+      resetdeletmode();
+
+      confirmaddbtn.classList.remove('hidden');
+
+      playerinfo.classList.toggle("hidden");
+    } else {
+      console.log("1")
+      playerinfo.classList.toggle("hidden");
+      confirmaddbtn.classList.toggle("hidden");
+    }
+
   });
 
   
@@ -416,31 +438,33 @@ const formations = {
 
 
 const editBtn = document.querySelector('.edit-btn');
-const editInstructions = document.querySelector('#edit-text');
-let isEditMode = false; 
-let selectedCard = null; 
+const edittext = document.querySelector('#edit-text');
+const editmessage = document.querySelector('#edit-message');
+
+let iseditmode = false; 
+let selectedcard = null; 
 
  
 editBtn.addEventListener('click', () => {
-  if (!isEditMode) {
-    isEditMode = true;
-    editInstructions.classList.remove('hidden');
-    editInstructions.textContent = "Click on a player card to edit.";
+  if (!iseditmode) {
+    resetdeletmode();
+    playerinfo.classList.add("hidden");
+    iseditmode = true;
+    edittext.classList.remove('hidden');
   } else {
- 
-    resetEditMode();
+    reseteditmode();
   }
 });
 
  
 document.querySelectorAll('.dropZone').forEach(card => {
   card.addEventListener('click', () => {
-    if (isEditMode && !selectedCard) {
-      selectedCard = card;
-      editInstructions.textContent = "Editing mode active. Modify the player details below.";
-      editInstructions.classList.add('hidden');
+    if (iseditmode && !selectedcard) {
+      selectedcard = card;
+      
+      edittext.classList.add("hidden");
+      editmessage.classList.remove("hidden");
 
-  
       const name = card.querySelector('.player-name').textContent;
       const photo = card.querySelector('.player-photo').src;
       const position = card.querySelector('.positionn').textContent;
@@ -465,13 +489,13 @@ document.querySelectorAll('.dropZone').forEach(card => {
 
 
 document.querySelector('.confirm-edit-btn').addEventListener('click', () => {
-  if (selectedCard) {
+  if (selectedcard) {
     const updatedName = nameinput.value;
     const updatedPhoto = photoinput.value;
     const updatedPosition = positionselect.value;
     const updatedRating = input1.value;
 
-    const updatedStats = [
+    const updatedstats = [
       input2.value,
       input3.value,
       input4.value,
@@ -481,30 +505,98 @@ document.querySelector('.confirm-edit-btn').addEventListener('click', () => {
     ];
 
 
-    selectedCard.querySelector('.player-name').textContent = updatedName;
-    selectedCard.querySelector('.player-photo').src = updatedPhoto;
-    selectedCard.querySelector('.positionn').textContent = updatedPosition;
-    selectedCard.querySelector('.rating').textContent = updatedRating;
+    selectedcard.querySelector('.player-name').textContent = updatedName;
+    selectedcard.querySelector('.player-photo').src = updatedPhoto;
+    selectedcard.querySelector('.positionn').textContent = updatedPosition;
+    selectedcard.querySelector('.rating').textContent = updatedRating;
 
-    const statsSpans = selectedCard.querySelectorAll('.stat:last-child span');
-    updatedStats.forEach((stat, index) => {
-      statsSpans[index].textContent = stat;
+    const statsspans = selectedcard.querySelectorAll('.stat:last-child span');
+    updatedstats.forEach((stat, index) => {
+      statsspans[index].textContent = stat;
     });
 
-    resetEditMode();
+    reseteditmode();
 
     document.querySelector(".player-stats").style.display = "none";
     playerinfo.classList.add('hidden');
   }
 });
 
-function resetEditMode() {
-  isEditMode = false;
-  selectedCard = null;
-  editInstructions.classList.add('hidden');
-  editInstructions.textContent = "";
+function reseteditmode() {
+  iseditmode = false;
+  selectedcard = null;
+  edittext.classList.add('hidden');
+  editmessage.classList.add('hidden');
   document.querySelector('.confirm-edit-btn').classList.add('hidden');
-  confirmaddbtn.classList.remove('hidden');
   document.querySelector(".player-stats").style.display = "none";
   playerinfo.classList.add('hidden');
+  // TODO:
+  nameinput.value = "";
+  photoinput.value = "";
+  nationalityinput.value = "";
+  flaginput.value = "";
+  clubinput.value = "";
+  logoinput.value = "";
+  positionselect.value = "Default";
+  input1.value = "";
+  input2.value = "";
+  input3.value = "";
+  input4.value = "";
+  input5.value = "";
+  input6.value = "";
+  input7.value = "";
+}
+
+  const deletebtn = document.querySelector(".remove-btn");
+  const confirmdeletbtn = document.querySelector(".confirm-remove-btn");
+
+  
+  const startdelet = document.getElementById("delete-start");
+  const confirmdeletp = document.getElementById("delete-confirmation-p");
+  let isdeletemode = false; 
+  let deletcard = null; 
+
+  deletebtn.addEventListener("click",() => {
+    if (!isdeletemode) {
+      reseteditmode();
+      isdeletemode = true;
+      startdelet.classList.remove('hidden');
+    } else {
+      resetdeletmode();
+    }
+  })
+  
+
+  
+  document.querySelectorAll('.dropZone').forEach(card => {
+    card.addEventListener('click', () => {
+      if (isdeletemode && !deletcard) {
+        deletcard = card;
+        startdelet.classList.add('hidden');
+
+        confirmdeletp.querySelector("h3").textContent = `The Player You Want To Delete Is : ${card.querySelector(".player-name").textContent}`
+        confirmdeletp.classList.remove("hidden");
+
+        confirmdeletbtn.classList.remove("hidden");
+
+        confirmdeletbtn.addEventListener("click", () => {
+            if (card.classList.contains("position")) {
+              card.removeChild(card.querySelector(".card"))
+              document.querySelector(".clicked-card").classList.add("hidden");
+            } else {
+              card.remove(card);
+            }
+            resetdeletmode();
+        })
+      }
+    });
+  });
+
+function resetdeletmode() {
+  isdeletemode = false;
+  deletcard = null;
+  startdelet.classList.add('hidden');
+  confirmdeletp.classList.add('hidden');
+  document.querySelector('.confirm-remove-btn').classList.add('hidden');
+  document.querySelector(".clicked-card").classList.add("hidden");
 }
