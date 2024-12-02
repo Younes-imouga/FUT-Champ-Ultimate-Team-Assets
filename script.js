@@ -29,7 +29,6 @@ const formations = {
     ]
   };
   
-  
   //here i started working on the formation positioning in its place
   const formatSelect = document.getElementById("format");
   const positions = document.querySelectorAll(".position");
@@ -257,7 +256,7 @@ const formations = {
         playerinput.style.display = "none"
 
       })
-    } else if (positionselect.value !== "Default" ) {
+    } else if (positionselect.value === "Default") {
       playerstats.style.display = "block";
       GKinputs.forEach(GKinput => {
         GKinput.style.display = "none"
@@ -302,18 +301,17 @@ const formations = {
 
               <div class="nationality-club">
                 <img src="${playerflag}" alt="${playernationality}" />
-                <span>${playerclub}</span>
                 <img src="${playerlogo}" alt="${playerclub}" />
               </div>
 
             <div class="stats">
               <div class="stat">
-                <span>PAC</span>
-                <span>SHO</span>
-                <span>PAS</span>
-                <span>DRI</span>
-                <span>DEF</span>
-                <span>PHY</span>
+                <span>DIV</span>
+                <span>HAN</span>
+                <span>KIC</span>
+                <span>REF</span>
+                <span>SPE</span>
+                <span>POS</span>
               </div>
               <div class="stat">
                   <span>${playerstats2}</span>
@@ -337,10 +335,8 @@ const formations = {
           
               <div class="nationality-club">
                 <img src="${playerflag}" alt="${playernationality}" />
-                <span>${playerclub}</span>
                 <img src="${playerlogo}" alt="${playerclub}" />
               </div>
-          
             <div class="stats">
               <div class="stat">
                 <span>PAC</span>
@@ -467,11 +463,23 @@ document.querySelectorAll('.dropZone').forEach(card => {
 
       const name = card.querySelector('.player-name').textContent;
       const photo = card.querySelector('.player-photo').src;
+      const nationalityandclub = card.querySelector(".nationality-club").querySelectorAll("img");
+      const nationality = nationalityandclub[0].alt;
+      const flag = nationalityandclub[0].src;
+      const club = nationalityandclub[1].alt;
+      const clublogo = nationalityandclub[1].src;
+
       const position = card.querySelector('.positionn').textContent;
       const rating = card.querySelector('.rating').textContent;
 
       nameinput.value = name;
       photoinput.value = photo;
+      nationalityinput.value = nationality;
+      flaginput.value = flag;
+      clubinput.value = club;
+      logoinput.value = clublogo;
+
+
       positionselect.value = position;
       input1.value = rating;
 

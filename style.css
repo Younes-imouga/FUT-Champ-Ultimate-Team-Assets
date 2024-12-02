@@ -157,7 +157,7 @@
         align-items: center;
         overflow: hidden;
         font-weight: bold;
-        color: #000;
+        color:e #000;
         transition: transform 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
     }
@@ -274,15 +274,16 @@
         justify-content: space-between;
         align-items: center;
         position: absolute;
-        width: 75%;
+        width: 40%;
         font-size: 0.9em;
         top: 70%;
-        left: 23px;
+        left: 20px;
         right: 15px;
+        margin: auto;
       }
   
       .card .nationality-club img {
-        width: 30px;
+        width: 20px;
         height: 20px;
       }
   
