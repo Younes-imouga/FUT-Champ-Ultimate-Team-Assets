@@ -543,6 +543,10 @@ document.querySelector('.confirm-edit-btn').addEventListener('click', () => {
 
     reseteditmode();
 
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.border = "none";
+    });
+
     document.querySelector(".player-stats").style.display = "none";
     playerinfo.classList.add('hidden');
   }
