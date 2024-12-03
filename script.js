@@ -162,7 +162,7 @@ const formations = {
               clickedcontainer.innerHTML = e.innerHTML;
               clickedcontainer.classList.remove("hidden");
               clickedcontainer.addEventListener("click", () => {
-                clickedcontainer.classList.add("hidden");
+              clickedcontainer.classList.add("hidden");
               });
           } else {
             clickedcontainer.classList.add("hidden");
@@ -217,7 +217,7 @@ const formations = {
 
       playerinfo.classList.toggle("hidden");
     } else {
-      console.log("1")
+      
       playerinfo.classList.toggle("hidden");
       confirmaddbtn.classList.toggle("hidden");
     }
@@ -244,10 +244,13 @@ const formations = {
   const input7 = document.getElementById("input7");
   
   positionselect.addEventListener("change", () => {
+    
     let playerstats = document.querySelector(".player-stats");
     let playerinputs = document.querySelectorAll(".player");
     let GKinputs = document.querySelectorAll(".goal-keeper");
     if (positionselect.value === "GK") {
+    
+
       playerstats.style.display = "block";
       GKinputs.forEach(GKinput => {
         GKinput.style.display = "block"
@@ -256,7 +259,9 @@ const formations = {
         playerinput.style.display = "none"
 
       })
-    } else if (positionselect.value === "Default") {
+    } else if (positionselect.value !== "Default") {
+    
+
       playerstats.style.display = "block";
       GKinputs.forEach(GKinput => {
         GKinput.style.display = "none"
@@ -300,8 +305,8 @@ const formations = {
               <div class="player-name">${playername}</div>
 
               <div class="nationality-club">
-                <img src="${playerflag}" alt="${playernationality}" />
-                <img src="${playerlogo}" alt="${playerclub}" />
+                <img src="${playerflag}" alt="${playernationality}" draggable="false"/>
+                <img src="${playerlogo}" alt="${playerclub}" draggable="false"/>
               </div>
 
             <div class="stats">
@@ -334,8 +339,8 @@ const formations = {
               <div class="player-name">${playername}</div>
           
               <div class="nationality-club">
-                <img src="${playerflag}" alt="${playernationality}" />
-                <img src="${playerlogo}" alt="${playerclub}" />
+                <img src="${playerflag}" alt="${playernationality}" draggable="false"/>
+                <img src="${playerlogo}" alt="${playerclub}" draggable="false"/>
               </div>
             <div class="stats">
               <div class="stat">
@@ -447,15 +452,28 @@ editBtn.addEventListener('click', () => {
     playerinfo.classList.add("hidden");
     iseditmode = true;
     edittext.classList.remove('hidden');
+    
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.border = "#3498db dashed 3px";
+    });
   } else {
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.border = "none";
+    });
     reseteditmode();
   }
 });
 
  
 document.querySelectorAll('.dropZone').forEach(card => {
+  
   card.addEventListener('click', () => {
     if (iseditmode && !selectedcard) {
+      document.querySelectorAll('.card').forEach(e => {
+        if (e.parentElement !== card) {                        
+          e.style.border = "none";
+        }
+      });
       selectedcard = card;
       
       edittext.classList.add("hidden");
@@ -569,7 +587,13 @@ function reseteditmode() {
       reseteditmode();
       isdeletemode = true;
       startdelet.classList.remove('hidden');
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.border = "red dashed 3px";
+      });
     } else {
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.border = "none";
+      });
       resetdeletmode();
     }
   })
@@ -578,7 +602,13 @@ function reseteditmode() {
   
   document.querySelectorAll('.dropZone').forEach(card => {
     card.addEventListener('click', () => {
+      
       if (isdeletemode && !deletcard) {
+        document.querySelectorAll('.card').forEach(e => {
+            if (e.parentElement !== card) {                        
+              e.style.border = "none";
+            }
+          });
         deletcard = card;
         startdelet.classList.add('hidden');
 
@@ -595,12 +625,13 @@ function reseteditmode() {
               card.remove(card);
             }
             resetdeletmode();
-        })
-      }
+          })
+        }
+      });
     });
-  });
-
+    
 function resetdeletmode() {
+
   isdeletemode = false;
   deletcard = null;
   startdelet.classList.add('hidden');
