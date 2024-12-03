@@ -100,15 +100,32 @@ const formations = {
     
         if (draggedElement && target && draggedElement !== target) {
           
-          const draggedContent = draggedElement.innerHTML;
-          const targetContent = target.innerHTML;
-    
-          draggedElement.innerHTML = targetContent;
-          target.innerHTML = draggedContent;
-    
-          
-          draggedElement.setAttribute("draggable", "true");
-          target.setAttribute("draggable", "true");
+          if (draggedElement.querySelector(".positionn").textContent == "GK") {            
+            if (target.classList.contains("GK")) {
+              const draggedContent = draggedElement.innerHTML;
+              const targetContent = target.innerHTML;
+        
+              draggedElement.innerHTML = targetContent;
+              target.innerHTML = draggedContent;
+        
+              
+              draggedElement.setAttribute("draggable", "true");
+              target.setAttribute("draggable", "true");
+            }
+             else {
+              alert("tu ne peut pas ajouter un GK que dans sont position");
+             }
+          } else {
+            const draggedContent = draggedElement.innerHTML;
+            const targetContent = target.innerHTML;
+      
+            draggedElement.innerHTML = targetContent;
+            target.innerHTML = draggedContent;
+      
+            
+            draggedElement.setAttribute("draggable", "true");
+            target.setAttribute("draggable", "true");
+          }
         }
         clearemptydropzone();
       });
@@ -643,3 +660,13 @@ function resetdeletmode() {
   document.querySelector('.confirm-remove-btn').classList.add('hidden');
   document.querySelector(".clicked-card").classList.add("hidden");
 }
+
+
+function joueurPresentAuxTerain() {
+  const feild = document.querySelector(".field-section");
+  const playersPresent = feild.querySelectorAll(".card");
+  playersPresent.forEach(card => {
+    console.log(card.querySelector(".player-name").textContent);
+  });
+}
+joueurPresentAuxTerain();
